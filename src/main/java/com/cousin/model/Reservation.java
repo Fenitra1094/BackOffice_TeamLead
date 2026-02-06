@@ -7,17 +7,17 @@ public class Reservation {
     private LocalDateTime dateHeureArrive;
     private String idClient;
     private int nbPassager;
-    private int idHotel;
+    private Hotel hotel;
 
     public Reservation() {
     }
 
-    public Reservation(int idReservation, LocalDateTime dateHeureArrive, String idClient, int nbPassager, int idHotel) {
+    public Reservation(int idReservation, LocalDateTime dateHeureArrive, String idClient, int nbPassager, Hotel hotel) {
         this.idReservation = idReservation;
         this.dateHeureArrive = dateHeureArrive;
         this.idClient = idClient;
         this.nbPassager = nbPassager;
-        this.idHotel = idHotel;
+        this.hotel = hotel;
     }
 
     public int getIdReservation() {
@@ -52,11 +52,11 @@ public class Reservation {
         this.nbPassager = nbPassager;
     }
 
-    public int getIdHotel() {
-        return idHotel;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setIdHotel(int idHotel) {
-        this.idHotel = idHotel;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }

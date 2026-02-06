@@ -28,4 +28,8 @@ public class ReservationService {
     public void createReservation(Reservation reservation) throws SQLException {
         reservationRepository.insert(reservation);
     }
+
+    public List<Reservation> listReservations() throws SQLException {
+        return reservationRepository.findAllWithHotel();
+    }
 }
