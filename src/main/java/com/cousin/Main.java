@@ -1,9 +1,11 @@
 package com.cousin;
 
+import com.cousin.model.TokenExpiration;
+import com.cousin.service.TokenService;
+import com.cousin.util.DbConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import com.cousin.util.DbConnection;
+import java.util.List;
 
 public final class Main {
     private Main() {
@@ -28,6 +30,57 @@ public final class Main {
             System.err.println("Database connection failed: " + e.getMessage());
             e.printStackTrace();
             System.exit(2);
+        }
+
+        // --- Gestion des tokens ---
+        String action = args.length > 0 ? args[0] : "generate";
+
+        TokenService tokenService = new TokenService();
+
+        try {
+            switch (action) {
+                case "generate":
+                    int hours = 24; // durée par défaut : 24h
+                    if (args.length > 1) {
+                        hours = Integer.parseInt(args[1]);
+                    }
+                    TokenExpiration newToken = tokenService.generateToken(hours);
+                    System.out.println("=== Nouveau token genere ===");
+                    System.out.println("Token  : " + newToken.getToken());
+                    System.out.println("Expire : " + newToken.getExpiration());
+                    System.out.println("ID     : " + newToken.getId());
+                    break;
+
+                case "list":
+                    List<TokenExpiration> tokens = tokenService.listTokens();
+                    System.out.println("=== Liste des tokens ===");
+                    if (tokens.isEmpty()) {
+                        System.out.println("Aucun token en base.");
+                    } else {
+                        for (TokenExpiration t : tokens) {
+                            String status = t.isExpired() ? "EXPIRE" : "VALIDE";
+                            System.out.printf("  [%d] %s | expire: %s | %s%n",
+                                    t.getId(), t.getToken(), t.getExpiration(), status);
+                        }
+                    }
+                    break;
+
+                case "clean":
+                    int deleted = tokenService.cleanExpiredTokens();
+                    System.out.println("Tokens expires supprimes : " + deleted);
+                    break;
+
+                default:
+                    System.out.println("Usage: Main <action> [options]");
+                    System.out.println("  generate [heures]  - Generer un nouveau token (defaut: 24h)");
+                    System.out.println("  list               - Lister tous les tokens");
+                    System.out.println("  clean              - Supprimer les tokens expires");
+                    break;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur token : " + e.getMessage());
+            e.printStackTrace();
+            System.exit(3);
         }
     }
 
