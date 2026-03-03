@@ -83,7 +83,7 @@ CHANGEMENT
 	.Fonction:
 		.insertion dans table
 		.getToken(le token qui est actif now<date d'expiration)
-		String token = getToken()(ilay ampiasaina idirana @le api avy eo)
+		String token = getToken()(ilay ampiasaina idirana @le api avy eo)(zay vo accessible ilay api )
 		izany oe miverifier an'io token io lou izy zay vo afaka miditra ao @api/reservation/list_reservation
 		verifier(date d'expiration)
 -session
