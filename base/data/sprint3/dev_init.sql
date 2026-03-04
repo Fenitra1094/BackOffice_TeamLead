@@ -9,13 +9,12 @@ INSERT INTO dev.Hotel (code, nom) VALUES
 ('CLB', 'Colbert'),
 ('NOV', 'Novotel'),
 ('IBS', 'Ibis');
-
-
 INSERT INTO dev.reservation (DateHeureArrive, idClient, nbPassager, Id_Hotel) VALUES
-('2026-03-05 08:00:00', 'CLI-001', 2, 5);
-('2026-03-05 09:30:00', 'CLI-002', 4, 6),
-('2026-03-05 11:00:00', 'CLI-003', 6, 4),
-('2026-03-06 10:15:00', 'CLI-004', 3, 7);
+('2026-03-05 08:00:00', 'CLI-001', 2, (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'CLB')),
+('2026-03-05 09:30:00', 'CLI-002', 4, (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'NOV')),
+('2026-03-05 11:00:00', 'CLI-003', 6, (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER')),
+('2026-03-06 10:15:00', 'CLI-004', 3, (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'IBS'));
+
 
 INSERT INTO dev.Vehicule (Reference, nbPlace, TypeVehicule) VALUES
 ('VH-D-001', 4, 'D'),
@@ -30,10 +29,8 @@ INSERT INTO dev.token_expiration (token, expiration) VALUES
 INSERT INTO dev.Parametre (code, valeur, unite, typeValeur) VALUES
 ('Vm', '30', 'km', 'Integer');
 
+
 INSERT INTO dev.Distance (from_hotel, to_hotel, km) VALUES
-(4, 5, 12),
-(1, 3, 18),
-(1, 4, 25),
-(2, 3, 7),
-(2, 4, 16),
-(3, 4, 10);
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'CLB'), 12),
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'NOV'), 18),
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'IBS'), 25);
