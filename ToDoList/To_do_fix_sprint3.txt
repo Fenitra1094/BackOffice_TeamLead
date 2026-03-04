@@ -1,0 +1,10 @@
+Fix : database_structure 
+    reset : 
+        Enlever tous les 'IF EXISTS' de TRUNCAT cause une erreur de syntaxe
+        Pas de reset pour les autres schemas
+    dev_init :
+        Modifier l insertion pour que l on est plus besoin de verifier l'existence d'un id particulier -> insertion plus simple
+            exemple :     
+                INSERT INTO dev.reservation (DateHeureArrive, idClient, nbPassager, Id_Hotel) VALUES ('2026-03-05 08:00:00', 'CLI-001', 2, 1); devient 
+                INSERT INTO dev.reservation (DateHeureArrive, idClient, nbPassager, Id_Hotel) VALUES ('2026-03-05 08:00:00', 'CLI-001', 2, (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'));
+        Ligne 15 : ';' devrait etre ',' cause erreur de syntaxe et les autres donees ne s'inserent pas
