@@ -30,10 +30,8 @@ INSERT INTO dev.token_expiration (token, expiration) VALUES
 INSERT INTO dev.Parametre (code, valeur, unite, typeValeur) VALUES
 ('Vm', '30', 'km', 'Integer');
 
+
 INSERT INTO dev.Distance (from_hotel, to_hotel, km) VALUES
-(4, 5, 12),
-(1, 3, 18),
-(1, 4, 25),
-(2, 3, 7),
-(2, 4, 16),
-(3, 4, 10);
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'CLB'), 12),
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'NOV'), 18),
+((SELECT Id_Hotel FROM dev.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM dev.Hotel WHERE code = 'IBS'), 25);

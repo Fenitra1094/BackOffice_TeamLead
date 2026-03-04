@@ -30,9 +30,6 @@ INSERT INTO staging.Parametre (code, valeur, unite, typeValeur) VALUES
 ('Vm', '30', 'km', 'Integer');
 
 INSERT INTO staging.Distance (from_hotel, to_hotel, km) VALUES
-(1, 2, 12),
-(1, 3, 18),
-(1, 4, 25),
-(2, 3, 7),
-(2, 4, 16),
-(3, 4, 10);
+((SELECT Id_Hotel FROM staging.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM staging.Hotel WHERE code = 'CLB'), 12),
+((SELECT Id_Hotel FROM staging.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM staging.Hotel WHERE code = 'NOV'), 18),
+((SELECT Id_Hotel FROM staging.Hotel WHERE code = 'AER'), (SELECT Id_Hotel FROM staging.Hotel WHERE code = 'IBS'), 25);
