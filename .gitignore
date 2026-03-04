@@ -1,19 +1,22 @@
-# WAR files
+# WAR généré
 *.war
 
-# Build output
+# Dossier build
 build/
 
-# IDE files
+# Fichiers IDE
 .idea/
 *.iml
 .vscode/
-*.class
+.settings/
+.project
+.classpath
+*.swp
+*~
 
-# OS files
-.DS_Store
+# Fichiers OS
 Thumbs.db
+.DS_Store
 
-# Temp files
-*.tmp
-sources.txt
+# Logs
+*.log
