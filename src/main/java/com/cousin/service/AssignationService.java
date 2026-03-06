@@ -28,17 +28,6 @@ public class AssignationService {
         this.dureeService = new DureeService();
     }
 
-    /**
-     * Assigne les réservations d'une date donnée aux véhicules disponibles.
-     * 
-     * Règles de priorisation :
-     * RG1 : capacité >= nb passagers
-     * RG2 : capacité la plus proche (nbPlace le plus petit suffisant)
-     * RG3 : Diesel prioritaire
-     * RG4 : Random si égalité
-     * 
-     * Tout se fait dans une TRANSACTION.
-     */
     public AssignationResult assignerPourDate(LocalDate date) throws SQLException {
         List<Assignation> assignations = new ArrayList<>();
         List<Reservation> reservationsNonAssignees = new ArrayList<>();
